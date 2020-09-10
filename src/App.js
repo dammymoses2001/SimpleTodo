@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import { Route, Switch } from 'react-router-dom';
+import Index from './containers/Index';
+import Login from './containers/Login';
+import Register from './containers/Register';
+import Schedular from './containers/Schedular';
+import Todos from './containers/Todos';
+import EditTodo from './containers/EditTodo';
+import Protected from './components/Protected';
+import Error from './containers/Error';
+import Help from './containers/Help';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Switch>
+        <Route exact path='/' component={Index} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/register' component={Register} />
+        <Protected exact path='/todos' component={Todos} />
+        <Protected exact path='/schedular' component={Schedular} />
+        <Protected exact path='/schedular/editTodo' component={EditTodo} />
+        <Route exact path='/schedular/help' component={Help} />
+        <Route exact component={Error} />
+      </Switch>
+    </>
   );
 }
 
